@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formBotaoNovoCidade">
+                    <p:commandButton value="Nova Cidade" update=":formFormularioCidade" oncomplete="PF('dialogCidade').show()"/>
+                </h:form>
+
+                <h:form id="formTabelaCidade">
+                    <p:dataTable value="#{cidadeMB.listaCidades}" var="cidade">
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{cidade.nome}"/>
+                        </p:column>
+                        
+                         <p:column headerText="Estado">
+                             <h:outputText value="#{cidade.estado.nome}"/>
+                        </p:column>
+
+                        <p:column headerText="Ações">
+                            <p:commandButton value="Alterar" oncomplete="PF('dialogCidade').show()" update=":formFormularioCidade" >
+                                <f:setPropertyActionListener value="#{cidade}" target="#{cidadeMB.cidade}"/>
+                            </p:commandButton>    
+                            <p:commandButton value="Excluir" update="@form" actionListener="#{cidadeMB.remover(cidade.id)}">
+                                <p:confirm header="Confirmação" message="Deseja excluir o Cidade?" icon="ui-icon-alert" />
+                            </p:commandButton>
+
+                        </p:column>
+                    </p:dataTable>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+
+
+                </h:form>
+
+                <p:dialog header="Cadastro Cidade" widgetVar="dialogCidade" modal="true" height="100">
+                    <h:form id="formFormularioCidade">
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Nome: "/>
+                            <p:inputText value="#{cidadeMB.cidade.nome}"/>
+                            <h:outputText value="Estado: "/>
+                            <p:selectOneMenu converter="converterEstado" value="#{cidadeMB.cidade.estado}" >
+                                <f:selectItems value="#{estadoMB.listaEstados}" var="estado" itemLabel="#{estado.nome}"
+                                               itemValue="#{estado}"/>
+                            </p:selectOneMenu>
+                            
+
+                            <p:commandButton value="Inserir" 
+                                             actionListener="#{cidadeMB.inserir()}"
+                                             oncomplete="PF('dialogCidade').hide()"
+                                             update=":formTabelaCidade"/>
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog> 
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
