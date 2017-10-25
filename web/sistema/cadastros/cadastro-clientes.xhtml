@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formBotaoNovoCliente">
+                    <p:commandButton value="Novo Cliente" update=":formFormularioCliente" oncomplete="PF('dialogCliente').show()"/>
+                </h:form>
+
+                <h:form id="formTabelaCliente">
+                    <p:dataTable value="#{clienteMB.listaClientes}" var="cidade">
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{cidade.nome}"/>
+                        </p:column>
+                        <p:column headerText="Endereço">
+                            <h:outputText value="#{cidade.endereco} - #{cidade.cidade.nome}"/>
+                        </p:column>
+                        <p:column headerText="Ações">
+                            <p:commandButton value="Alterar" oncomplete="PF('dialogCliente').show()" update=":formFormularioCliente" >
+                                <f:setPropertyActionListener value="#{cidade}" target="#{clienteMB.cliente}"/>
+                            </p:commandButton>    
+                            <p:commandButton value="Excluir" update="@form" actionListener="#{clienteMB.remover(cidade.id)}">
+                                <p:confirm header="Confirmação" message="Deseja excluir o Cliente?" icon="ui-icon-alert" />
+                            </p:commandButton>
+
+                        </p:column>
+                    </p:dataTable>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+
+
+                </h:form>
+
+                <p:dialog header="Cadastro Clientes" widgetVar="dialogCliente" modal="true" height="200">
+                    <h:form id="formFormularioCliente">
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Nome"/>
+                            <p:inputText value="#{clienteMB.cliente.nome}"/>
+                            <h:outputText value="Endereço"/>
+                            <p:inputText value="#{clienteMB.cliente.endereco}"/>
+                            <h:outputText value="CPF"/>
+                            <p:inputText value="#{clienteMB.cliente.cpf}"/>
+                            <h:outputText value="Cidade: "/>
+                            <p:selectOneMenu converter="converterCidade" value="#{clienteMB.cliente.cidade}" >
+                                <f:selectItems value="#{cidadeMB.listaCidades}" var="cid" itemLabel="#{cid.nome}"
+                                               itemValue="#{cid}"/>
+                            </p:selectOneMenu>
+                            <p:commandButton value="Inserir" 
+                                             actionListener="#{clienteMB.inserir()}"
+                                             oncomplete="PF('dialogCliente').hide()"
+                                             update=":formTabelaCliente"/>
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog> 
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

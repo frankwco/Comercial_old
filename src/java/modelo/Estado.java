@@ -27,9 +27,6 @@ public class Estado implements Serializable{
     
     private String nome;
     private String sigla;
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Cidade> cidades;
-    
 
     public Long getId() {
         return id;
