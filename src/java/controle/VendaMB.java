@@ -38,8 +38,11 @@ public class VendaMB {
     }
     
     public void inserirItensVenda(){
+        System.out.println("Quantidade: "+itensVenda.getQuantidade());
         listaItensVenda.add(itensVenda);
+        System.out.println("Tam Lista: "+listaItensVenda.size());
         itensVenda = new ItensVenda();
+        System.out.println("Quantidade: "+itensVenda.getQuantidade());
     }
     
     public void inserirVenda(){
