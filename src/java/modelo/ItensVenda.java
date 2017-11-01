@@ -26,9 +26,55 @@ public class ItensVenda implements Serializable {
     
     @ManyToOne
     private Venda venda;
+    @ManyToOne
+    private Produto produto;
+    private Double valorUnitario;
+    private Double quantidade;
+    private Double valorTotal;  
+
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
     
-    private Cliente cliente;
-    private Usuario usuario;
+    
+
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Double getValorUnitario() {
+        return valorUnitario;
+    }
+
+    public void setValorUnitario(Double valorUnitario) {
+        this.valorUnitario = valorUnitario;
+    }
+
+    public Double getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Double quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    
 
     public Long getId() {
         return id;
