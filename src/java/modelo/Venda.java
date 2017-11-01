@@ -25,16 +25,50 @@ public class Venda implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    
+
+    @ManyToOne
+    private Cliente cliente;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dataVenda;
-    
+    private Date dataVenda = new Date();
     private Double valorVenda;
     private String observacao;
-    
     @ManyToOne
     private Usuario vendedor;
+    private Double valorTotalVenda;
+    private String status;
+    private String formaPagamento;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Double getValorTotalVenda() {
+        return valorTotalVenda;
+    }
+
+    public void setValorTotalVenda(Double valorTotalVenda) {
+        this.valorTotalVenda = valorTotalVenda;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
 
     public Usuario getVendedor() {
         return vendedor;
@@ -43,8 +77,6 @@ public class Venda implements Serializable {
     public void setVendedor(Usuario vendedor) {
         this.vendedor = vendedor;
     }
-    
-    
 
     public Date getDataVenda() {
         return dataVenda;
@@ -69,8 +101,6 @@ public class Venda implements Serializable {
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -104,5 +134,5 @@ public class Venda implements Serializable {
     public String toString() {
         return "modelo.Venda[ id=" + id + " ]";
     }
-    
+
 }
