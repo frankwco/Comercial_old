@@ -10,20 +10,19 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.Cidade;
-import modelo.Estado;
+import modelo.Produto;
 
 /**
  *
  * @author Frank
  */
-@FacesConverter("converterCidade")
-public class ConverterCliente implements Converter{
+@FacesConverter("converterProduto")
+public class ConverterProduto implements Converter{
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String id) {
         if(id!=null && !id.isEmpty()){
-            DAOGenerico<Cidade> dao = new DAOGenerico<Cidade>(Cidade.class);
+            DAOGenerico<Produto> dao = new DAOGenerico<Produto>(Produto.class);
             return dao.buscarPorId(new Long(id));
         }
         return null;
@@ -32,8 +31,8 @@ public class ConverterCliente implements Converter{
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
         if(o!=null){
-            Cidade estado = (Cidade) o;
-            return String.valueOf(estado.getId());
+            Produto ob = (Produto) o;
+            return String.valueOf(ob.getId());
         }
         return null;
     }

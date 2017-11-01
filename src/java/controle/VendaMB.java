@@ -21,7 +21,6 @@ import modelo.Venda;
 @ViewScoped
 public class VendaMB {
 
-    private List<Venda> listaVendas;
     private List<ItensVenda> listaItensVenda;
     private Venda venda;
     private ItensVenda itensVenda;
@@ -30,11 +29,10 @@ public class VendaMB {
 
     public VendaMB() {
         criarObjetos();
-        preencherListaVendas();
+       
     }
     public void criarObjetos(){
         listaItensVenda = new ArrayList<>();
-        listaVendas = new ArrayList<>();
         venda = new Venda();
         itensVenda = new ItensVenda();
     }
@@ -55,20 +53,33 @@ public class VendaMB {
             }
         }else{
             daoVenda.alterar(venda);
-        }
-        preencherListaVendas();
+        }       
     }
 
-    private void preencherListaVendas() {
-        listaVendas = daoVenda.buscarTodos();
+    public List<ItensVenda> getListaItensVenda() {
+        return listaItensVenda;
     }
 
-    public List<Venda> getListaVendas() {
-        return listaVendas;
+    public void setListaItensVenda(List<ItensVenda> listaItensVenda) {
+        this.listaItensVenda = listaItensVenda;
     }
 
-    public void setListaVendas(List<Venda> listaVendas) {
-        this.listaVendas = listaVendas;
+    public Venda getVenda() {
+        return venda;
     }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
+    }
+
+    public ItensVenda getItensVenda() {
+        return itensVenda;
+    }
+
+    public void setItensVenda(ItensVenda itensVenda) {
+        this.itensVenda = itensVenda;
+    }
+
+   
 
 }

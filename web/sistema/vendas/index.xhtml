@@ -13,10 +13,12 @@
             <ui:define name="content">
         <h1>Vendas Realizadas</h1>
         <br/>
-        <p:commandButton value="Nova Venda"/>
+        <h:form>
+        <p:commandButton value="Nova Venda" ajax="false" action="nova-venda.xhtml"/>
+        </h:form>
         <br/><br/>
 
-        <p:dataTable value="#{vendaMB.listaVendas}" var="v">
+        <p:dataTable value="#{listarVendasMB.listaVendas}" var="v">
             <p:column headerText="Vendedor">
                 <h:outputText value="#{v.vendedor.nome}"/>
             </p:column>
