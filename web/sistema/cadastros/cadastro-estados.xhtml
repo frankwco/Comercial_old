@@ -13,6 +13,9 @@
             <ui:define name="content">
                 <h:form id="formBotaoNovoEstado">
                     <p:commandButton value="Novo Estado" update=":formFormularioEstado" oncomplete="PF('dialogEstado').show()"/>
+                    <p:commandButton ajax="false" 
+                                     value="Relatório de Estados" 
+                                     actionListener="#{estadoMB.chamarRelatorio()}"/>
                 </h:form>
              
                 <h:form id="formTabelaEstado">

@@ -33,7 +33,12 @@ public class EstadoMB {
     public EstadoMB() {
         criarObjetos();
         preencherListaEstados();
-    }    
+    } 
+    public void chamarRelatorio(){
+        ChamarRelatorio rel=new ChamarRelatorio();
+        rel.imprimeRelatorio("estado.jasper", null, 
+                "relatorio_estados");
+    }
 
 
     private void criarObjetos() {
