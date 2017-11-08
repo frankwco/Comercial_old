@@ -6,13 +6,17 @@
 package controle;
 
 import dao.DAOGenerico;
+import java.io.IOException;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import modelo.Estado;
+import util.ChamarRelatorio;
 
 /**
  *
@@ -29,7 +33,8 @@ public class EstadoMB {
     public EstadoMB() {
         criarObjetos();
         preencherListaEstados();
-    }
+    }    
+
 
     private void criarObjetos() {
         estado = new Estado();

@@ -14,7 +14,7 @@
                 <h:form id="formBotaoNovoEstado">
                     <p:commandButton value="Novo Estado" update=":formFormularioEstado" oncomplete="PF('dialogEstado').show()"/>
                 </h:form>
-
+             
                 <h:form id="formTabelaEstado">
                     <p:dataTable value="#{estadoMB.listaEstados}" var="estado">
                         <p:column headerText="Nome">
