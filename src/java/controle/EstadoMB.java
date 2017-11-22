@@ -29,6 +29,8 @@ public class EstadoMB {
     private Estado estado;
     private List<Estado> listaEstados;
     private DAOGenerico<Estado> daoEstado;
+    //gerar get e set
+    private String nome;
 
     public EstadoMB() {
         criarObjetos();
@@ -38,6 +40,14 @@ public class EstadoMB {
         ChamarRelatorio rel=new ChamarRelatorio();
         rel.imprimeRelatorio("estado.jasper", null, 
                 "relatorio_estados");
+    }
+    
+    public void relatorioParametro(){
+       ChamarRelatorio rel = new ChamarRelatorio();
+        HashMap map = new HashMap();
+        map.put("NOME", nome);
+        //map.put("SIGLA", "pr");
+       rel.imprimeRelatorio("estados_param.jasper", map, "rel_estados");
     }
 
 
@@ -81,5 +91,14 @@ public class EstadoMB {
     public void setListaEstados(List<Estado> listaEstados) {
         this.listaEstados = listaEstados;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
 
 }
